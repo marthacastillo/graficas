@@ -141,29 +141,37 @@ top5 = top20[0:5]
 # so we can get the movies' titles
 top5_dict = top5.to_dict()
 prueba= top5_dict['rating'].values()
+name = top5_dict['rating'].keys()
+keys = list(name)
 
 plot1= list(prueba)
-plt.plot(plot1,color='green', marker='o', linestyle='solid')
-plt.xlabel('RATING')
-plt.ylabel('PELICULA')
+
+plt.xticks(range(1, 6), keys,rotation = -30, fontsize = 7, ha= 'left')
+plt.bar(range(1,6),plot1,color='red', align='center')
+plt.xlabel('PELICULA')
+plt.ylabel('VOTOS')
 plt.title('TOP 5')
-plt.legend()
+plt.tight_layout()
+#print(prueba)
 plt.savefig("top5.png")
 
-print("holaaa ya llegue aqui")
-print(plot1)
+
 
 top20_dict = top20.to_dict()
 prueba2= top20_dict['rating'].values()
+name2 = top20_dict['rating'].keys()
+keys2 = list(name2)
 plot2= list(prueba2)
-plt.plot(plot2,color='red', marker='o', linestyle='solid')
-plt.xlabel('RATING')
-plt.ylabel('PELICULA')
+#print(prueba2)
+plt.xticks(range(1, 21), keys2, rotation = -30, fontsize = 7, ha= 'left')
+plt.bar(range(1,21),plot2,color='red',align='center')
+plt.xlabel('PELICULA')
+plt.ylabel('VOTOS')
 plt.title('TOP 20')
-plt.legend()
+plt.tight_layout()
+
 plt.savefig("top20.png")
-print("holaaa ya llegue aqui2")
-print(plot2)
+
 
 # We need to get the items (Movies titles)
 top5_items = top5_dict['rating'].items()

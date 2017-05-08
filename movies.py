@@ -10,7 +10,7 @@ import os
 import pandas as pd
 from statistics import mean
 import matplotlib.pyplot as plt
-
+import matplotlib.pyplot as h
 
 DEBUG = False
 
@@ -140,42 +140,56 @@ top5 = top20[0:5]
 # Wee need to transform it to a dict
 # so we can get the movies' titles
 top5_dict = top5.to_dict()
-prueba= top5_dict['rating'].values()
-name = top5_dict['rating'].keys()
-keys = list(name)
+#prueba= top5_dict['rating'].values()
+#name = top5_dict['rating'].keys()
+#keys = list(name)
+#plot1= list(prueba)
+#plt.barh(range(1,6),plot1,color='red', align='center')
 
-plot1= list(prueba)
 
-plt.xticks(range(1, 6), keys,rotation = -30, fontsize = 7, ha= 'left')
-plt.bar(range(1,6),plot1,color='red', align='center')
-plt.xlabel('PELICULA')
-plt.ylabel('VOTOS')
-plt.title('TOP 5')
-plt.tight_layout()
+
+
+#plt.yticks(range(1, 6), keys,rotation = 0, fontsize = 7, size  = 6)
+
+#plt.xlabel('VOTOS')
+#plt.ylabel('VOTOS')
+#plt.title('TOP 5')
+#plt.tight_layout()
 #print(prueba)
-plt.savefig("top5.png")
+#plt.savefig("top5.png",figsize=(9,10))
 
 
 
+#top20_dict = top20.to_dict()
+#prueba2= top20_dict['rating'].values()
+#name2 = top20_dict['rating'].keys()
+#keys2 = list(name2)
+#plot2= list(prueba2)
+#plt.barh(range(1,21),plot2,color='red')
+#plt.yticks(range(1, 21), keys2, rotation = 0, fontsize = 7)
+#plt.xlabel('VOTOS')
+#plt.ylabel('VOTOS')
+#plt.title('TOP 20')
+#plt.tight_layout()
+#
+#histograma
 top20_dict = top20.to_dict()
-prueba2= top20_dict['rating'].values()
-name2 = top20_dict['rating'].keys()
-keys2 = list(name2)
-plot2= list(prueba2)
-#print(prueba2)
-plt.xticks(range(1, 21), keys2, rotation = -30, fontsize = 7, ha= 'left')
-plt.bar(range(1,21),plot2,color='red',align='center')
-plt.xlabel('PELICULA')
-plt.ylabel('VOTOS')
-plt.title('TOP 20')
-plt.tight_layout()
+groupedc = rated_movies.groupby('title').count()
 
-plt.savefig("top20.png")
-
-
-# We need to get the items (Movies titles)
+pruebah= top20_dict['rating'].values()
+h2= list(pruebah)
+print(sorted(h2))
+#print(h2)
+h.hist(h2, bins= 'auto')
+h.title("Histograma")
+h.xlabel("Votos")
+h.ylabel("Frecuencia")
+h.ion()
+fi = h.gcf()
+fi.savefig("histograma.png")
 top5_items = top5_dict['rating'].items()
-
+print(g)
+####
 # A helper array for stacking the results per movie
 frames = []
 

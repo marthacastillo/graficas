@@ -140,39 +140,40 @@ top5 = top20[0:5]
 # Wee need to transform it to a dict
 # so we can get the movies' titles
 top5_dict = top5.to_dict()
-#prueba= top5_dict['rating'].values()
-#name = top5_dict['rating'].keys()
-#keys = list(name)
-#plot1= list(prueba)
-#plt.barh(range(1,6),plot1,color='red', align='center')
+# prueba= top5_dict['rating'].values()
+# name = top5_dict['rating'].keys()
+# keys = list(name)
+# plot1= list(prueba)
+# plt.barh(range(1,6),plot1,color='red', align='center')
 
 
 
 
-#plt.yticks(range(1, 6), keys,rotation = 0, fontsize = 7, size  = 6)
+# plt.yticks(range(1, 6), keys,rotation = 0, fontsize = 7, size  = 6)
 
-#plt.xlabel('VOTOS')
-#plt.ylabel('VOTOS')
-#plt.title('TOP 5')
-#plt.tight_layout()
-#print(prueba)
-#plt.savefig("top5.png",figsize=(9,10))
+# plt.xlabel('ratings')
+# #plt.ylabel('VOTOS')
+# plt.title('TOP 5')
+# plt.tight_layout()
+# #print(prueba)
+# plt.savefig("top5.png",figsize=(9,10))
 
 
 
-#top20_dict = top20.to_dict()
-#prueba2= top20_dict['rating'].values()
-#name2 = top20_dict['rating'].keys()
-#keys2 = list(name2)
-#plot2= list(prueba2)
-#plt.barh(range(1,21),plot2,color='red')
-#plt.yticks(range(1, 21), keys2, rotation = 0, fontsize = 7)
-#plt.xlabel('VOTOS')
-#plt.ylabel('VOTOS')
-#plt.title('TOP 20')
-#plt.tight_layout()
-#
-#histograma
+# top20_dict = top20.to_dict()
+# prueba2= top20_dict['rating'].values()
+# name2 = top20_dict['rating'].keys()
+# keys2 = list(name2)
+# plot2= list(prueba2)
+# plt.barh(range(1,21),plot2,color='red')
+# plt.yticks(range(1, 21), keys2, rotation = 0, fontsize = 7)
+# plt.xlabel('Rating')
+# #plt.ylabel('VOTOS')
+# plt.title('TOP 20')
+# plt.tight_layout()
+# plt.savefig("top20.png",figsize=(9,10))
+
+# #histograma
 top20_dict = top20.to_dict()
 groupedc = rated_movies.groupby('title').count()
 
@@ -180,15 +181,14 @@ pruebah= top20_dict['rating'].values()
 h2= list(pruebah)
 print(sorted(h2))
 #print(h2)
-h.hist(h2, bins= 'auto')
+h.hist(h2,6)
 h.title("Histograma")
-h.xlabel("Votos")
-h.ylabel("Frecuencia")
+h.xlabel("Frecuencia")
+h.ylabel("Rating")
 h.ion()
 fi = h.gcf()
 fi.savefig("histograma.png")
 top5_items = top5_dict['rating'].items()
-print(g)
 ####
 # A helper array for stacking the results per movie
 frames = []
@@ -207,7 +207,6 @@ final_variables_array = [top20, top5, result]
 ratings_by_title = rated_movies.groupby('title').size()
 # Do we need to subset?
 hottest_titles = ratings_by_title.index[ratings_by_title >= 250]
-
 # Getting the mean of rated movies
 mean_ratings = rated_movies.pivot_table(
     'rating',
@@ -226,3 +225,20 @@ for i in range(3):
         # Export to CSV
         print("Exporting file to CSV")
 final_variables_array[i].to_csv(filenames_array[i])
+#print(grouped)
+print(grouped.sort_values('rating'))
+g= grouped.to_dict()
+print("Prueba", g)
+pl = g['rating'].values()
+print(pl)
+lista= list(pl)
+print(lista)
+o= lista.remove('nan')
+print(o)
+
+###
+# grouped = rated_movies.groupby('title').mean()
+# groupedprueba = grouped.to_dict()['rating'].values()
+# lgp= list(groupedprueba)
+# print(lgp)
+##
